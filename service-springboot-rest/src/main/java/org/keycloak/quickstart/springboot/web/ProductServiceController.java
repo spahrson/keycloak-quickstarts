@@ -20,6 +20,7 @@ package org.keycloak.quickstart.springboot.web;
 import org.keycloak.quickstart.springboot.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,9 +39,19 @@ public class ProductServiceController {
         
     private @Autowired HttpServletRequest request;
 
-	@GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<String> handleCustomersRequest(Principal principal) {
+	@GetMapping(value = "/productsA", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> handleCustomersRequestA(Principal principal) {
             return productService.getProducts();
+	}
+
+	@GetMapping(value = "/productsB", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> handleCustomersRequestBB(Principal principal) { return productService.getProducts(); }
+
+	@Secured("ROLE_user")
+	//@PreAuthorize("hasAuthority('ROLE_user')")
+	@GetMapping(value = "/productsC", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<String> handleCustomersRequestC(Principal principal) {
+		return productService.getProducts();
 	}
 
 	@GetMapping(value = "/public", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -12,7 +12,10 @@
     <artifactId>service-springboot</artifactId>
     <description>Spring Boot Keycloak Product Service</description>
     <properties>
-        <springboot-version>2.0.3.RELEASE</springboot-version>
+        <java.version>1.11</java.version>
+        <maven.compiler.source>1.11</maven.compiler.source>
+        <maven.compiler.target>1.11</maven.compiler.target>
+        <springboot-version>2.2.4.RELEASE</springboot-version>
         <arquillian-managed>false</arquillian-managed>
     </properties>
     <dependencyManagement>
@@ -39,6 +42,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${springboot-version}</version>
+        </dependency>
+
+        <!-- with spring security, remove this dependency if you don't want to use spring security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <!-- KeyCloak -->
